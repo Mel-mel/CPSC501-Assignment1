@@ -28,14 +28,15 @@ public class Driver
     private static String lineFromFile = null;
     private static boolean finished = false;
     
-	private static char appearanceRect;
+	private static String appearanceRect;
 	private static int width;
 	private static int height;
-	private static char appearanceLeftTri;
+	private static String appearanceLeftTri;
 	private static int size_Left_Tri;
-	private static char appearanceRightTri;
+	private static String appearanceRightTri;
 	private static int size_right_tri;
     
+	private static Shape rectangle, leftTriangle, rightTriangle;
 	private static Draw drawShapes = new Draw();
 	
     public static void main(String [] args) throws Exception
@@ -43,13 +44,16 @@ public class Driver
 		readFromFile(args);
 		
 		extractRectContent();
-		drawShapes.drawRectangle(appearanceRect, width, height);
+		rectangle = new Shape(width, height, appearanceRect);
+		drawShapes.drawRectangle(rectangle);
 		
 		extractLeftTriContent();
-		drawShapes.drawLeftTriangle(appearanceLeftTri, size_Left_Tri);
+		leftTriangle = new Shape(size_Left_Tri, size_Left_Tri, appearanceLeftTri);
+		drawShapes.drawLeftTriangle(leftTriangle);
 		
 		extractRightTriContent();
-		drawShapes.drawRightTriangle(appearanceRightTri, size_right_tri);
+		rightTriangle = new Shape(size_right_tri, size_right_tri, appearanceRightTri);
+		drawShapes.drawRightTriangle(rightTriangle);
      		
 		//Displays the results for the drawings.
 		Draw some_results = new Draw();
@@ -61,13 +65,11 @@ public class Driver
 	public static void extractRectContent() throws IOException
 	{
 		String aLine = lineFromFile;
-		String appearanceStringRect = "a";
-		appearanceStringRect = aLine.substring(2, 4);
+		appearanceRect = aLine.substring(2, 3);
 		String heightStringRect = aLine.substring(3, 4);
 		String widthStringRect = aLine.substring(4);
 		height = Integer.parseInt(heightStringRect);//Converts height into an integer.
 		width = Integer.parseInt(widthStringRect);//Converts the width into an integer.
-		appearanceRect = appearanceStringRect.charAt(0);//Converts the appearance to a character.
 		SHAPE_TYPE_RECT = aLine.substring(0, 2);
 		lineFromFile = br.readLine();
 	}
@@ -77,11 +79,9 @@ public class Driver
 	public static void extractLeftTriContent() throws IOException
 	{
 		String aLine2 = lineFromFile;
-		String appearanceStringLeftTri = "l";
-		appearanceStringLeftTri = aLine2.substring(2, 4);
+		appearanceLeftTri = aLine2.substring(2, 3);
 		String sizeStringLeftTri = aLine2.substring(3, 4);
 		size_Left_Tri = Integer.parseInt(sizeStringLeftTri);//Converts variable to an integer.
-		appearanceLeftTri = appearanceStringLeftTri.charAt(0);//Converts to the variable to a character.
 		SHAPE_TYPE_LEFTTRI= aLine2.substring(0, 2);
 		lineFromFile = br.readLine();
 	}
@@ -91,16 +91,16 @@ public class Driver
 	public static void extractRightTriContent() throws IOException
 	{
 		String aLine3 = lineFromFile;
-		String appearanceStringRightTri = "r";
-		appearanceStringRightTri = aLine3.substring(2, 4);
+		appearanceRightTri = aLine3.substring(2, 3);
 		String sizeStringRightTri = aLine3.substring(3, 4);
 		size_right_tri = Integer.parseInt(sizeStringRightTri);//Converts the size into an integer.
-		appearanceRightTri = appearanceStringRightTri.charAt(0);//Converts the appearance into a character.
 		SHAPE_TYPE_RIGHTTRI = aLine3.substring(0, 2);
 		//System.out.println(shape_type_RightTri);
 		//System.out.println(sizeStringRightTri);
 		lineFromFile = br.readLine();
 	}
+	
+	
 	// JT: The first and only input to the program (after name of Java 
  	// file) must be the name of the input file.
  	public static void readFromFile(String [] args) throws Exception
