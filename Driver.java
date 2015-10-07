@@ -29,12 +29,12 @@ public class Driver
 	private static Draw drawShapes = new Draw();
 	
 	private static String rectangleStr, triangleStr, stringFromLine, shapeType;
-    private static int height, width, triSize, numRect, numLeft, numRight;
+    private static int height, width, triSize;
 	
     public static void main(String [] args) throws Exception
     {
 		readFromFile(args);
-		
+
 		extractRectContent();
 		rectangle = new Shape(width, height, rectangleStr, shapeType);
 		drawShapes.drawRectangle(rectangle);
@@ -49,13 +49,28 @@ public class Driver
      		
 		//Displays the results for the drawings.
 		System.out.println("\nTotals for the number of shapes drawn");
-		showResults(rectangle);
-		showResults(leftTriangle);
-		showResults(rightTriangle);
+		
+		showResults();
+	
       
     }
     
-  //This is to extract the components for the rectangle.
+    //This prints out the final results after drawing
+    public static void showResults()
+    {
+    	int numOfShape = results(rectangle);
+    	System.out.println("Rectangles: " + numOfShape);
+    	
+    	numOfShape = results(leftTriangle);
+    	System.out.println("Left Triangles: " + numOfShape);
+    	
+    	numOfShape = results(rightTriangle);
+		System.out.println("Right Triangles: " + numOfShape);
+    }
+    
+    //This is to extract the components for the rectangle.
+    //Parsing through the file it stores the .txt content into variables
+    //that are used to make objects for drawing.
     public static void extractRectContent() throws IOException
     {
     	shapeType = lineFromFile.substring(0, 2);
@@ -68,13 +83,15 @@ public class Driver
 		
     }
     
+    //This extracts the components for a left and right triangle
+    //Parsing through the file it stores the .txt content into variables
+    //that are used to make objects for drawing.
     public static void extractTriContent() throws IOException
     {
     	shapeType = lineFromFile.substring(0, 2);
     	triangleStr = lineFromFile.substring(2, 3);
     	stringFromLine = lineFromFile.substring(3, 4);
     	triSize = Integer.parseInt(stringFromLine);
-    	
     	lineFromFile = br.readLine();
     }
 	
@@ -96,30 +113,32 @@ public class Driver
  		    // JT: Empty input file
  		    if (lineFromFile == null)
  		    {
- 		        System.out.println("Empty input file: no guesses to play with");
+ 		        System.out.println("Empty input file");
  		        finished = true;
  		    }
  	    }
  	}
 	
  	//This method prints the final results after the program is finished drawing.
-    public static void showResults(Shape shape){
-    	System.out.println(shape.getShapeType());
+ 	//It counts the shape type and adds the total number of shapes that have been printed.
+    public static int calcResults(Shape shape){
+    	int num = 0;
         if(shape.getShapeType() == "RE")
         {
-        	numRect += 1;
+        	num += 1;
+        	return num;
         }
         else if(shape.getShapeType() == "LT")
         {
-        	numLeft += 1;
+        	num += 1;
+        	return num;
         }
         else
         {
-        	numRight += 1;
+        	num += 1;
+        	return num;
         }
-        System.out.println("Rectangles: " + numRect);
-        System.out.println("Left Triangles: " + numLeft);
-        System.out.println("Right Triangles: " + numRight);
+        
    }
  	
     //This is the my banner.
