@@ -36,32 +36,26 @@ public class Driver
 	private static char appearanceRightTri;
 	private static int size_right_tri;
     
+	private static Draw drawShapes = new Draw();
+	
     public static void main(String [] args) throws Exception
     {
 		readFromFile(args);
 		
 		extractRectContent();
-		extractLeftTriContent();
-		extractRightTriContent();
+		drawShapes.drawRectangle(appearanceRect, width, height);
 		
+		extractLeftTriContent();
+		drawShapes.drawLeftTriangle(appearanceLeftTri, size_Left_Tri);
+		
+		extractRightTriContent();
+		drawShapes.drawRightTriangle(appearanceRightTri, size_right_tri);
      		
-				
-		//Creates new rectangle object.		
-		Draw aRectangle = new Draw();
-		aRectangle.drawRectangle(appearanceRect, width, height);
-                //Create new Left triangle object.
-                Draw aLeftTri = new Draw();
-                aLeftTri.drawLeftTriangle(appearanceLeftTri, size_Left_Tri);
-                //Creates new Right triangle object.
-		Draw aRightTri = new Draw();
-		aRightTri.drawRightTriangle(appearanceRightTri, size_right_tri);
 		//Displays the results for the drawings.
 		Draw some_results = new Draw();
 		some_results.showResults(SHAPE_TYPE_RECT, SHAPE_TYPE_LEFTTRI, SHAPE_TYPE_RIGHTTRI);
       
     }
-    
-    
     
  	//This is to extract the components for the rectangle.
 	public static void extractRectContent() throws IOException
