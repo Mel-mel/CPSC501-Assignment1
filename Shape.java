@@ -1,15 +1,16 @@
 
 public class Shape {
 
-	private String appearance;
-	private int width;
-	private int height;
+	private String appearance, shapeType;
+	private int width, height;
 	
-	public Shape(int w, int h, String a)
+	
+	public Shape(int w, int h, String a, String type)
 	{
 		width = w;
 		height = h;
 		appearance = a;
+		shapeType = type;
 	}
 	
 	public String getAppearance()
@@ -24,5 +25,9 @@ public class Shape {
 	public int getHeight()
 	{
 		return height;
+	}
+	public String getShapeType()
+	{
+		return shapeType;
 	}
 }

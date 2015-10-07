@@ -15,11 +15,13 @@ public class Draw{
 	    height = rectangle.getHeight() + 1;
 	    width = rectangle.getWidth() + 1;
 	    //This loop draws the rectangle.
-	    for(int p = 1; p < height; p++){
-		for (int q = 1; q < width; q++){
-		    System.out.print(rectangle.getAppearance());
-		}
-		System.out.println("");
+	    for(int p = 1; p < height; p++)
+	    {
+	    	for (int q = 1; q < width; q++)
+	    	{
+	    		System.out.print(rectangle.getAppearance());
+	    	}
+	    	System.out.println("");
 	    }
 	    System.out.println("");
 
@@ -61,16 +63,4 @@ public class Draw{
 	    	System.out.println("");
 	    }
 	}
-    //This method prints the final results after the program is finished drawing.
-        public void showResults(final String SHAPE_TYPE_RECT, final String SHAPE_TYPE_LEFTTRI, final String SHAPE_TYPE_RIGHTTRI){
-            System.out.println("\nTotals for the number of shapes drawn");
-            int num_Rect = 1;
-	    System.out.println("Rectangles: " + num_Rect);
-	    int num_LeftTri = 1;
-	    System.out.println("Left Triangles: " + num_LeftTri);
-	    int num_RightTri = 1;
-	    System.out.println("Right Triangles: " + num_RightTri);
-       }
-	 
-
 }
