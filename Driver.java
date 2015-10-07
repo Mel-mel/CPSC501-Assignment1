@@ -28,31 +28,26 @@ public class Driver
     private static String lineFromFile = null;
     private static boolean finished = false;
     
-	private static String appearanceRect;
-	private static int width;
-	private static int height;
-	private static String appearanceLeftTri;
-	private static int size_Left_Tri;
-	private static String appearanceRightTri;
-	private static int size_right_tri;
-    
 	private static Shape rectangle, leftTriangle, rightTriangle;
 	private static Draw drawShapes = new Draw();
+	
+	private static String rectangleStr, triangleStr, stringFromLine;
+    private static int height, width, triSize;
 	
     public static void main(String [] args) throws Exception
     {
 		readFromFile(args);
 		
 		extractRectContent();
-		rectangle = new Shape(width, height, appearanceRect);
+		rectangle = new Shape(width, height, rectangleStr);
 		drawShapes.drawRectangle(rectangle);
 		
-		extractLeftTriContent();
-		leftTriangle = new Shape(size_Left_Tri, size_Left_Tri, appearanceLeftTri);
-		drawShapes.drawLeftTriangle(leftTriangle);
-		
-		extractRightTriContent();
-		rightTriangle = new Shape(size_right_tri, size_right_tri, appearanceRightTri);
+		extractTriContent();
+    	leftTriangle = new Shape(triSize, triSize, triangleStr);
+        drawShapes.drawLeftTriangle(leftTriangle);
+        
+    	extractTriContent();
+    	rightTriangle = new Shape(triSize, triSize, triangleStr);
 		drawShapes.drawRightTriangle(rightTriangle);
      		
 		//Displays the results for the drawings.
@@ -61,45 +56,25 @@ public class Driver
       
     }
     
- 	//This is to extract the components for the rectangle.
-	public static void extractRectContent() throws IOException
-	{
-		String aLine = lineFromFile;
-		appearanceRect = aLine.substring(2, 3);
-		String heightStringRect = aLine.substring(3, 4);
-		String widthStringRect = aLine.substring(4);
-		height = Integer.parseInt(heightStringRect);//Converts height into an integer.
-		width = Integer.parseInt(widthStringRect);//Converts the width into an integer.
-		SHAPE_TYPE_RECT = aLine.substring(0, 2);
+  //This is to extract the components for the rectangle.
+    public static void extractRectContent() throws IOException
+    {
+		rectangleStr = lineFromFile.substring(2, 3);
+		stringFromLine = lineFromFile.substring(3, 4);
+		height = Integer.parseInt(stringFromLine);
+		stringFromLine = lineFromFile.substring(4);
+		width = Integer.parseInt(stringFromLine);//Converts the width into an integer.
 		lineFromFile = br.readLine();
-	}
-	
-		
-	//This is to extract the components for the Left Triangle.
-	public static void extractLeftTriContent() throws IOException
-	{
-		String aLine2 = lineFromFile;
-		appearanceLeftTri = aLine2.substring(2, 3);
-		String sizeStringLeftTri = aLine2.substring(3, 4);
-		size_Left_Tri = Integer.parseInt(sizeStringLeftTri);//Converts variable to an integer.
-		SHAPE_TYPE_LEFTTRI= aLine2.substring(0, 2);
-		lineFromFile = br.readLine();
-	}
-	
-			
-	//This is to extract the component for the Right Triangle.
-	public static void extractRightTriContent() throws IOException
-	{
-		String aLine3 = lineFromFile;
-		appearanceRightTri = aLine3.substring(2, 3);
-		String sizeStringRightTri = aLine3.substring(3, 4);
-		size_right_tri = Integer.parseInt(sizeStringRightTri);//Converts the size into an integer.
-		SHAPE_TYPE_RIGHTTRI = aLine3.substring(0, 2);
-		//System.out.println(shape_type_RightTri);
-		//System.out.println(sizeStringRightTri);
-		lineFromFile = br.readLine();
-	}
-	
+		//final String SHAPE_TYPE_RECT = lineFromFile.substring(0, 2);
+    }
+    
+    public static void extractTriContent() throws IOException
+    {
+    	triangleStr = lineFromFile.substring(2, 3);
+    	stringFromLine = lineFromFile.substring(3, 4);
+    	triSize = Integer.parseInt(stringFromLine);
+    	lineFromFile = br.readLine();
+    }
 	
 	// JT: The first and only input to the program (after name of Java 
  	// file) must be the name of the input file.
