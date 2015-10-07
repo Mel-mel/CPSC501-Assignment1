@@ -6,12 +6,10 @@
 //Assignment: 2
 
 public class Draw{
-    //Attributes of the class Draw.
-	public char appearance;
-	public int width;
-        public int height;
     
-    //This is the method that draws the rectangle.
+    private int height;
+	private int width;
+	//This is the method that draws the rectangle.
 	public void drawRectangle(char appearance, int width, int height){
 	    height = height + 1;
 	    width = width + 1;
