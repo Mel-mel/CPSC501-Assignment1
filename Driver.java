@@ -19,50 +19,32 @@ import java.io.*;
 
 public class Driver
 {
+	private static String SHAPE_TYPE_RECT = null;
+	private static String SHAPE_TYPE_LEFTTRI = null;
+	private static String SHAPE_TYPE_RIGHTTRI = null;
 	private static FileReader fr = null;
     private static BufferedReader br = null;
     private static String filename = null;
     private static String lineFromFile = null;
     private static boolean finished = false;
     
+	private static char appearanceRect;
+	private static int width;
+	private static int height;
+	private static char appearanceLeftTri;
+	private static int size_Left_Tri;
+	private static char appearanceRightTri;
+	private static int size_right_tri;
+    
     public static void main(String [] args) throws Exception
     {
 		readFromFile(args);
-		//This is to extract the components for the rectangle.
-		String aLine = lineFromFile;
-		String appearanceStringRect = "a";
-		appearanceStringRect = aLine.substring(2, 4);
-		String heightStringRect = aLine.substring(3, 4);
-		String widthStringRect = aLine.substring(4);
-		int height = Integer.parseInt(heightStringRect);//Converts height into an integer.
-		int width = Integer.parseInt(widthStringRect);//Converts the width into an integer.
-		char appearanceRect = appearanceStringRect.charAt(0);//Converts the appearance to a character.
-		final String SHAPE_TYPE_RECT = aLine.substring(0, 2);
-		lineFromFile = br.readLine();
-				
-		//This is to extract the components for the Left Triangle.
-		String aLine2 = lineFromFile;
-		String appearanceStringLeftTri = "l";
-		appearanceStringLeftTri = aLine2.substring(2, 4);
-		String sizeStringLeftTri = aLine2.substring(3, 4);
-		int size_Left_Tri = Integer.parseInt(sizeStringLeftTri);//Converts variable to an integer.
-		char appearanceLeftTri = appearanceStringLeftTri.charAt(0);//Converts to the variable to a character.
-		final String SHAPE_TYPE_LEFTTRI= aLine2.substring(0, 2);
-		//System.out.println(shape_type_LeftTri);
-		//System.out.println(sizeStringLeftTri);
-		lineFromFile = br.readLine();
-				
-		//This is to extract the component for the Right Triangle.
-     		String aLine3 = lineFromFile;
-		String appearanceStringRightTri = "r";
-		appearanceStringRightTri = aLine3.substring(2, 4);
-		String sizeStringRightTri = aLine3.substring(3, 4);
-		int size_right_tri = Integer.parseInt(sizeStringRightTri);//Converts the size into an integer.
-		char appearanceRightTri = appearanceStringRightTri.charAt(0);//Converts the appearance into a character.
-		final String SHAPE_TYPE_RIGHTTRI = aLine2.substring(0, 2);
-		//System.out.println(shape_type_RightTri);
-		//System.out.println(sizeStringRightTri);
-		lineFromFile = br.readLine();
+		
+		extractRectContent();
+		extractLeftTriContent();
+		extractRightTriContent();
+		
+     		
 				
 		//Creates new rectangle object.		
 		Draw aRectangle = new Draw();
@@ -80,7 +62,52 @@ public class Driver
     }
     
     
-    // JT: The first and only input to the program (after name of Java 
+    
+ 	//This is to extract the components for the rectangle.
+	public static void extractRectContent() throws IOException
+	{
+		String aLine = lineFromFile;
+		String appearanceStringRect = "a";
+		appearanceStringRect = aLine.substring(2, 4);
+		String heightStringRect = aLine.substring(3, 4);
+		String widthStringRect = aLine.substring(4);
+		height = Integer.parseInt(heightStringRect);//Converts height into an integer.
+		width = Integer.parseInt(widthStringRect);//Converts the width into an integer.
+		appearanceRect = appearanceStringRect.charAt(0);//Converts the appearance to a character.
+		SHAPE_TYPE_RECT = aLine.substring(0, 2);
+		lineFromFile = br.readLine();
+	}
+	
+		
+	//This is to extract the components for the Left Triangle.
+	public static void extractLeftTriContent() throws IOException
+	{
+		String aLine2 = lineFromFile;
+		String appearanceStringLeftTri = "l";
+		appearanceStringLeftTri = aLine2.substring(2, 4);
+		String sizeStringLeftTri = aLine2.substring(3, 4);
+		size_Left_Tri = Integer.parseInt(sizeStringLeftTri);//Converts variable to an integer.
+		appearanceLeftTri = appearanceStringLeftTri.charAt(0);//Converts to the variable to a character.
+		SHAPE_TYPE_LEFTTRI= aLine2.substring(0, 2);
+		lineFromFile = br.readLine();
+	}
+	
+			
+	//This is to extract the component for the Right Triangle.
+	public static void extractRightTriContent() throws IOException
+	{
+		String aLine3 = lineFromFile;
+		String appearanceStringRightTri = "r";
+		appearanceStringRightTri = aLine3.substring(2, 4);
+		String sizeStringRightTri = aLine3.substring(3, 4);
+		size_right_tri = Integer.parseInt(sizeStringRightTri);//Converts the size into an integer.
+		appearanceRightTri = appearanceStringRightTri.charAt(0);//Converts the appearance into a character.
+		SHAPE_TYPE_RIGHTTRI = aLine3.substring(0, 2);
+		//System.out.println(shape_type_RightTri);
+		//System.out.println(sizeStringRightTri);
+		lineFromFile = br.readLine();
+	}
+	// JT: The first and only input to the program (after name of Java 
  	// file) must be the name of the input file.
  	public static void readFromFile(String [] args) throws Exception
  	{
@@ -103,7 +130,7 @@ public class Driver
  		    }
  	    }
  	}
-    
+	
     //This is the my banner.
   	public static void printBanner()
   	{
