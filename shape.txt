@@ -1,0 +1,4 @@
+RE?53
+LT*2
+RT*4
+There is suppose to be a Draw.java. need to get it from uni.
