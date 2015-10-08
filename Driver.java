@@ -15,6 +15,11 @@ import java.io.*;
   * Getting the command-line input
   * Reading from file
   * Converting the lines from file to numeric form.
+  * 
+  * What the program does:
+  * This takes a command line argument that is a text file. In that text file it contains characters and integers
+  * that need to be processed so that they can instantiated into an object that will draw a shape. The program only
+  * deals with the specified file "shape.txt" and the content inside it.
 */
 
 public class Driver
@@ -23,7 +28,7 @@ public class Driver
     private static BufferedReader br = null;
     private static String filename = null;
     private static String lineFromFile = null;
-    private static boolean finished = false;
+    private static boolean emptyFile = false;
     
 	private static Shape rectangle, leftTriangle, rightTriangle;
 	private static Draw drawShapes = new Draw();
@@ -34,28 +39,40 @@ public class Driver
     public static void main(String [] args) throws Exception
     {
 		readFromFile(args);
-
-		extractRectContent();
-		rectangle = new Shape(width, height, rectangleStr, shapeType);
-		drawShapes.drawRectangle(rectangle);
 		
-		extractTriContent();
-    	leftTriangle = new Shape(triSize, triSize, triangleStr, shapeType);
-        drawShapes.drawLeftTriangle(leftTriangle);
-        
-    	extractTriContent();
-    	rightTriangle = new Shape(triSize, triSize, triangleStr, shapeType);
-		drawShapes.drawRightTriangle(rightTriangle);
-     		
-		//Displays the results for the drawings.
-		System.out.println("\nTotals for the number of shapes drawn");
-		
-		showResults();
+		//Check if the file reading has finished. If it's not then there is an empty file
+		//being passed in as a text document so program does not do anything but print
+		//an error message.
+		if(emptyFile == false)
+		{
+			extractRectContent();
+			rectangle = new Shape(width, height, rectangleStr, shapeType);
+			drawShapes.drawRectangle(rectangle);
+			
+			extractTriContent();
+	    	leftTriangle = new Shape(triSize, triSize, triangleStr, shapeType);
+	        drawShapes.drawLeftTriangle(leftTriangle);
+	        
+	    	extractTriContent();
+	    	rightTriangle = new Shape(triSize, triSize, triangleStr, shapeType);
+			drawShapes.drawRightTriangle(rightTriangle);
+	     		
+			//Displays the results for the drawings.
+			System.out.println("\nTotals for the number of shapes drawn");
+			
+			showResults();
+		}
+		else
+		{
+			System.out.println("Please provide a non-empty text file");
+		}
+			
 	
       
     }
     
-    //This prints out the final results after drawing
+    //This prints out the final results after drawing. Determines number of rectangles,
+    //left and right triangles.
     public static void showResults()
     {
     	int numOfShape = calcResults(rectangle);
@@ -114,7 +131,7 @@ public class Driver
  		    if (lineFromFile == null)
  		    {
  		        System.out.println("Empty input file");
- 		        finished = true;
+ 		        emptyFile = true;
  		    }
  	    }
  	}
@@ -126,25 +143,21 @@ public class Driver
         if(shape.getShapeType() == "RE")
         {
         	num += 1;
-        	return num;
         }
         else if(shape.getShapeType() == "LT")
         {
         	num += 1;
-        	return num;
         }
         else
         {
         	num += 1;
-        	return num;
         }
-        
+        return num;
    }
  	
-    //This is the my banner.
+    //This prints out my banner.
   	public static void printBanner()
   	{
-  	
   		System.out.println("Last Name: Ta");
   		System.out.println("First Name: Melissa");
   		System.out.println("Student ID: 10110850");

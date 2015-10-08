@@ -9,12 +9,12 @@ public class Draw{
     
 	private static int width;
 	private static int height;
-	
-    //This is the method that draws the rectangle.
+
+    //This is the method that draws the rectangle. Takes the height and width and prints out
+	//rows and columns of a character to form a shape of a rectangle
 	public void drawRectangle(Shape rectangle){
-	    height = rectangle.getHeight() + 1;
+		height = rectangle.getHeight() + 1;
 	    width = rectangle.getWidth() + 1;
-	    //This loop draws the rectangle.
 	    for(int p = 1; p < height; p++)
 	    {
 	    	for (int q = 1; q < width; q++)
@@ -27,7 +27,9 @@ public class Draw{
 
 	}
 
-    //This is the method that draws the Left Triangle.
+    //This is the method that draws the Left Triangle. Although height and width are the same
+	//they're used in the for loop such that width decreases by 1 each row. Best to have 
+	//separate variables to hold values that change.
 	public void drawLeftTriangle(Shape leftTri){
 		height = leftTri.getHeight();
 		width = leftTri.getWidth();
@@ -45,7 +47,9 @@ public class Draw{
 		}
 	    System.out.println("");
 	}
-    //This method draws the Right Triangle. This loop only draws a rectangle at the moment. Was not able to draw the right triangle properly.
+    //This method draws the Right Triangle. Same idea as drawLeftTriangle with height and width being the same
+	//but spaces are printed out first, then the width is decreased such that when it prints the characters
+	//they will start from the right to the left.
 	public void drawRightTriangle(Shape rightTri){
 		height = rightTri.getHeight();
 		width = rightTri.getWidth();
